@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/vue-i18n@9"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ $t('message.uname') }}</p>
+  </div>
+  <script>
+    const messages = {
+      en: {
+        message: {
+          words: 'aaa帅哥鉴赏',
+          uname: "@.noa:message.words"
+        }
+      }
+    }
+    const i18n = VueI18n.createI18n({
+      locale: 'en',
+      messages,
+      modifiers: {
+        noa: (str) => str.replace(/a/g, '')
+      }
+    })
+    const app = Vue.createApp({})
+    app.use(i18n)
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

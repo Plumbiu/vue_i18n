@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/vue-i18n@9"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ $d(new Date(), 'short') }}</p>
+    <p>{{ $d(new Date(), 'long') }}</p>
+    <p>{{ $d(new Date(), 'long', 'ja-JP') }}</p>
+    <p>{{ $d(new Date(), 'long', 'ja-JP') }}</p>
+  </div>
+  <script>
+    const numberFormats = {
+      'en-US': {
+        currency: {
+          style: 'currency', currency: 'USD', notation: 'standard'
+        },
+        decimal: {
+          style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
+        },
+        percent: {
+          style: 'percent', useGrouping: false
+        }
+      },
+      'ja-JP': {
+        currency: {
+          style: 'currency', currency: 'JPY', useGrouping: true, currencyDisplay: 'symbol'
+        },
+        decimal: {
+          style: 'decimal', minimumSignificantDigits: 3, maximumSignificantDigits: 5
+        },
+        percent: {
+          style: 'percent', useGrouping: false
+        }
+      }
+    }
+    const i18n = VueI18n.createI18n({
+      locale: 'en',
+      fallbackLocale: 'ja-JP',
+      numberFormats
+    })
+    const app = Vue.createApp({})
+    app.use(i18n)
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
